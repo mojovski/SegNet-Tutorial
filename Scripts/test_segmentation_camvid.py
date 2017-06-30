@@ -7,7 +7,7 @@ import argparse
 import math
 import pylab
 from sklearn.preprocessing import normalize
-caffe_root = '/SegNet/caffe-segnet/' 			# Change this to the absolute directoy to SegNet Caffe
+caffe_root = '/home/eugen/projects/caffee/caffe-segnet/'			# Change this to the absolute directoy to SegNet Caffe
 import sys
 sys.path.insert(0, caffe_root + 'python')
 

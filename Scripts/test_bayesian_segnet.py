@@ -10,8 +10,11 @@ import matplotlib.pyplot as plt
 import cv2
 import sys
 
+#for a tutorial on caffe with pythong see
+#http://christopher5106.github.io/deep/learning/2015/09/04/Deep-learning-tutorial-on-Caffe-Technology.html
+
 # Make sure that caffe is on the python path:
-caffe_root = '/SegNet/caffe-segnet/' 			# Change this to the absolute directoy to SegNet Caffe
+caffe_root = '/home/eugen/projects/caffee/caffe-segnet/' 			# Change this to the absolute directoy to SegNet Caffe
 sys.path.insert(0, caffe_root + 'python')
 
 import caffe
@@ -47,9 +50,9 @@ with open(args.data) as f:
 	input_image = np.asarray([input_image])
 	input_image = np.repeat(input_image,input_shape[0],axis=0)
 
-	out = net.forward_all(data=input_image)
+	out = net.forward_all()#(data=input_image)
 
-	predicted = net.blobs['prob'].data
+	predicted = net.blobs['prob'].data #the result. th
 
 	output = np.mean(predicted,axis=0)
 	uncertainty = np.var(predicted,axis=0)
@@ -84,9 +87,9 @@ with open(args.data) as f:
 	plt.show()
 
 	# uncomment to save results
-	#scipy.misc.toimage(segmentation_rgb, cmin=0.0, cmax=255.0).save(IMAGE_FILE+'_segnet_segmentation.png')
-	#cm = matplotlib.pyplot.get_cmap('bone_r') 
-	#matplotlib.image.imsave(input_image_file+'_segnet_uncertainty.png',average_unc,cmap=cm, vmin=0, vmax=max_average_unc)
+	scipy.misc.toimage(segmentation_rgb, cmin=0.0, cmax=255.0).save(IMAGE_FILE+'_segnet_segmentation.png')
+	cm = matplotlib.pyplot.get_cmap('bone_r') 
+	matplotlib.image.imsave(input_image_file+'_segnet_uncertainty.png',average_unc,cmap=cm, vmin=0, vmax=max_average_unc)
 
 	print 'Processed: ', input_image_file
 
